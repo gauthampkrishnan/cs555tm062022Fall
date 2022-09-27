@@ -1,11 +1,8 @@
 from prettytable import PrettyTable
-
 p_table = PrettyTable()
 f_table = PrettyTable()
-
 ans = []
 fam_ans = []
-
 class Family:
     def __init__(self, id, married, husband, wife, children, divorced):
         self.chil_list = []
@@ -25,46 +22,45 @@ class Individual:
         self.alive = alive
         self.death = death
 
-
 def gedcom_table(file_name):
     file = open(file_name, 'r')
-    valid_tags = ["INDI", "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "FAM", "MARR", "HUSB", "WIFE", "CHIL", "DIV", "DATE", "HEAD", "TRLR", "NOTE", "N/A"]
-    id_list = []
-    name_list = []
-    gender_list = []
-    birth_list = []
-    age_list = []
-    alive_list = []
+    birt_or_deat = "BIRT"
+    marr_or_div = "DIV"
     death_list = []
     child_list = []
     spouse_list = []
     fam_list = []
     husb_list = []
     wife_list = []
+    id_list = []
+    name_list = []
+    gender_list = []
+    birth_list = []
+    age_list = []
+    alive_list = []
     chil_list = []
     marr_list = []
     div_list = []
-    birt_or_deat = "BIRT"
-    marr_or_div = "DIV"
     starter = False
     checker = True
-    while (True):
+    valid_tags = ["INDI", "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "FAM", "MARR", "HUSB", "WIFE", "CHIL", "DIV", "DATE", "HEAD", "TRLR", "NOTE", "N/A"]
+    while(True):
         file_line = file.readline()
         if (file_line==""):
             break
         file_line_copy = file_line.split()
         for tag in valid_tags:
             if (tag in file_line_copy):
-                if (tag=="INDI"):
-                    id_list.append(file_line_copy[1])
-                    child_list.append("N/A")
-                    spouse_list.append("N/A")
-                    starter = True
-                elif (tag=="FAM"):
+                if (tag=="FAM"):
                     if (checker==False):
                         chil_list.append("N/A")
                     checker = True
                     fam_list.append(file_line_copy[1])
+                elif (tag=="INDI"):
+                    id_list.append(file_line_copy[1])
+                    child_list.append("N/A")
+                    spouse_list.append("N/A")
+                    starter = True
                 else:
                     if (starter):
                         arg = ' '.join(file_line_copy[2:])
@@ -72,10 +68,10 @@ def gedcom_table(file_name):
                             arg = "N/A"
                         if (tag=="NAME"):
                             name_list.append(arg)
-                        elif (tag=="SEX"):
-                            gender_list.append(arg)
                         elif (tag=="BIRT"):
                             birt_or_deat = "BIRT"
+                        elif (tag=="SEX"):
+                            gender_list.append(arg)
                         elif (tag=="DEAT"):
                             birt_or_deat = "DEAT"
                             if (arg=="Y"):
@@ -95,15 +91,14 @@ def gedcom_table(file_name):
                             else:
                                 div_list.append(arg)
                                 marr_list.append(arg)
-                        elif (tag=="HUSB"):
-                            checker = False
-                            husb_list.append(arg)
-                        elif (tag=="WIFE"):
-                            wife_list.append(arg)
                         elif (tag=="CHIL"):
                             checker = True
                             chil_list.append(arg)
-
+                        elif (tag=="WIFE"):
+                            wife_list.append(arg)
+                        elif (tag=="HUSB"):
+                            checker = False
+                            husb_list.append(arg)
     
     p_table.add_column("ID", id_list)
     p_table.add_column("Name", name_list)
@@ -119,20 +114,14 @@ def gedcom_table(file_name):
     f_table.add_column("Husband ID", husb_list)
     f_table.add_column("Wife ID", wife_list)
     f_table.add_column("Children", chil_list)
-    
     print("Individuals")
     print(p_table)
     print("Families")
     print(f_table)
     file.close()
-    
-    for i in range(len(id_list)):
-        ans.append(Individual(id_list[i], name_list[i], gender_list[i], birth_list[i], alive_list[i], death_list[i]))
-    
     for i in range(len(fam_list)):
         fam_ans.append(Family(fam_list[i], marr_list[i], husb_list[i], wife_list[i], chil_list[i], div_list[i]))
-
-
+    for i in range(len(id_list)):
+        ans.append(Individual(id_list[i], name_list[i], gender_list[i], birth_list[i], alive_list[i], death_list[i]))
     return [ans, fam_ans]
-    
 gedcom_table("gedcom_test.ged")
