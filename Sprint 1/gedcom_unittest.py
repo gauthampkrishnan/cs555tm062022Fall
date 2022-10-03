@@ -1,33 +1,17 @@
-#Gautham Prem Krishnan
 import unittest
 import gedcom_parser
+# from dateutil.parser import *
 import datetime
 from datetime import date
 from gedcom_parser import p_table, f_table
 
-
 table = gedcom_parser.gedcom_table("gedcom_test.ged")
-month_dict = {"JAN": 1,
-            "FEB": 2,
-            "MAR": 3,
-            "APR": 4,
-            "MAY": 5,
-            "JUN": 6,
-            "JUL": 7,
-            "AUG": 8,
-            "SEP": 9,
-            "OCT": 10,
-            "NOV": 11,
-            "DEC": 12}
-
+month_dict = {"JAN": 1,"FEB": 2,"MAR": 3,"APR": 4,"MAY": 5,"JUN": 6,"JUL": 7,"AUG": 8,"SEP": 9,"OCT": 10,"NOV": 11,"DEC": 12}
 
 print(p_table)
 print(f_table)
 
 class TestGedcomFile(unittest.TestCase):
-
-  
-  
     #User story 9 - Child should be born before death of mother and before 9 months after death of father
     def test_us_9(self):
         for family in table[1]:
@@ -69,6 +53,8 @@ class TestGedcomFile(unittest.TestCase):
                                         print("Child should be born before death of mother and before 9 months after death of father")
                                         return
         print('Test 9 passed succesfully')
+
+        
     def test_us_38(self):
         list_recent = []
         for indiv in table[0]:
