@@ -65,7 +65,6 @@ def individual_parser(file_name):
                     id = elements[1].replace('@', "")
                     individual_obj = Individual(id,"","","",0,True,"NA",[],[])                
                     individual.append(individual_obj)
-                # print(individual)
         if(elements[0] == '1'):
             if(elements[1] == 'NAME'):
                 previous_name = individual.pop()
@@ -90,7 +89,6 @@ def individual_parser(file_name):
                 individual.append(previous_child)
         if(elements[0] == '2'):
             if(elements[1] == 'DATE'):
-                # print(date_flag)
                 if(date_flag == 'BIRT'):
                     previous_birthdate = individual.pop()
                     previous_birthdate.birthday = elements[4]+'/'+month_dict[elements[3]]+'/'+elements[2]
@@ -124,24 +122,17 @@ def family_parser(file_name):
                     id = elements[1].replace('@', "")
                     family_obj = Family(id,"NA","NA","","","","",[])                
                     family.append(family_obj)
-                    # print()
-                # print(individual)
         if(elements[0] == '1'):
-            # print(elements[1])
             if(elements[1] == 'HUSB'):
-                # print(elements[1])
                 previous_husb = family.pop()
                 previous_husb.husbandId = elements[2].replace('@',"")
                 family.append(previous_husb)
-                # print(previous_husb)
             if(elements[1] == 'WIFE'):
                 previous_wife = family.pop()
                 previous_wife.wifeId = elements[2].replace('@',"")
                 family.append(previous_wife)
             if(elements[1] == 'MARR'):
-                # print(date_flag)
-                date_flag = date_flag.replace(date_flag,"MARR")
-                # print(date_flag) 
+                date_flag = date_flag.replace(date_flag,"MARR") 
             if(elements[1] == 'DIV'):
                 date_flag = date_flag.replace(date_flag,"DIV")
             if(elements[1] == 'CHIL'):
@@ -150,23 +141,13 @@ def family_parser(file_name):
                 family.append(previous_chil)
         if(elements[0] == '2'):
             if(elements[1] == 'DATE'):
-                # print(date_flag)
                 if(date_flag == 'MARR'):
                     previous_marrieddate = family.pop()
                     previous_marrieddate.married = elements[4]+'/'+month_dict[elements[3]]+'/'+elements[2]
-                    # previous_marrieddate.alive = True
-                    # marrieddate = date(int(elements[4]),int(month_dict[elements[3]]),int(elements[2]))
-                    # today = date.today()
-                    # previous_marrieddate.age = today.year - marrieddate.year - ((today.month, today.day) < (marrieddate.month, marrieddate.day))
                     family.append(previous_marrieddate)
                 if(date_flag == 'DIV'):
-                    # print(date_flag)
                     previous_divdate = family.pop()
                     previous_divdate.divorced = elements[4]+'/'+month_dict[elements[3]]+'/'+elements[2]
-                    # previous_deathdate.alive = False
-                    # divdate = date(int(elements[4]),int(month_dict[elements[3]]),int(elements[2]))
-                    # today = date.today()
-                    # previous_deathdate.age = deathdate.year - birthdate.year - ((deathdate.month, deathdate.day) < (birthdate.month, birthdate.day))
                     family.append(previous_divdate)
     
     return family
