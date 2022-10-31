@@ -203,9 +203,9 @@ def us15(individuals,families):
         for family in table_value_one:
             for indiv in table_value_zero:
                 if indiv.id in family.childrenId:
-                    if len(family.childrenId<15):
+                    if (len(family.childrenId<15)):
                         return
-                    elif len(family.childrenId) >= 15:
+                    elif (len(family.childrenId) >= 15):
                         print("There should be fewer than 15 siblings in a family")
                         return
         print('Test 15 passed succesfully')
