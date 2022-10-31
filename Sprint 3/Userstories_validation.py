@@ -164,18 +164,7 @@ def us06(individuals,families):
                             return False
     print("Test 6 passed successfully")
     return True
-month_dict = {"JAN": 1,
-            "FEB": 2,
-            "MAR": 3,
-            "APR": 4,
-            "MAY": 5,
-            "JUN": 6,
-            "JUL": 7,
-            "AUG": 8,
-            "SEP": 9,
-            "OCT": 10,
-            "NOV": 11,
-            "DEC": 12}
+
 #Gautham Prem Krishnan
 def us14(individuals,families):
         for family in families:
@@ -188,10 +177,18 @@ def us14(individuals,families):
                         for child in family.childrenId:
                             for i in individuals:
                                 if (child==i.id):
-                                    temp_birth = indiv.birth.split(" ")
-                                    indiv_birth = datetime.datetime(int(temp_birth[2]), month_dict[temp_birth[1]], int(temp_birth[0]))
-                                    temp_child = i.birth.split(" ")
-                                    child_birth = datetime.datetime(int(temp_child[2]), month_dict[temp_child[1]], int(temp_child[0]))
+                                    temp_birth = indiv.birth.split("/")
+                                    indiv_birth=date(
+                                    int(temp_birth[0]),
+                                    int(temp_birth[1]),
+                                    int(temp_birth[2]))
+                                   
+                                    temp_child = i.birth.split("/")
+                                    child_birth=date(
+                                    int(temp_child[0]),
+                                    int(temp_child[1]),
+                                    int(temp_child[2]))
+                                   
                                     check_birth = abs( (indiv_birth - child_birth).days ) < 2
                                     if check_birth:
                                         count+=1
