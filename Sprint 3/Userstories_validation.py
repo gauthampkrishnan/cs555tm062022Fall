@@ -16,7 +16,6 @@ def us07(individuals, families):
                             int(birthdate[2]))
         isalive = individual_person.alive
         if(isalive == 'True'):
-            # checkBirthDate = date.today() - date_of_birth
             if(individual_person.age > 150):
                 print("ERROR: INDIVIDUAL: US07: More than 150 years old - Birth date {}".format(birthdate))
                 return  False          
@@ -26,7 +25,6 @@ def us07(individuals, families):
                             int(deathdate[0]),
                             int(deathdate[1]),
                             int(birthdate[2]))
-            # checkDeathDate = date_of_death.year - date_of_birth.year
             if individual_person.age > 150:
                 print("ERROR: INDIVIDUAL: US07: More than 150 years old at Death - Birth {} : Death {}".format(birthdate,deathdate))
                 return False           
@@ -36,7 +34,6 @@ def us07(individuals, families):
 
 def us01(individuals,families):
     for individual_person in individuals:
-            # self.assertNotEqual(person.birthday, None, "Error: Birthday cannot be None")
             birthdate = individual_person.birthday.split("/")
             date_of_birth = date(
                             int(birthdate[0]),
@@ -46,7 +43,6 @@ def us01(individuals,families):
                 print('Birthday cannot be before today')
                 return False
 
-            #self.assertLess(birthday, today, "Error: Birthday cannot be before today")
 
             if individual_person.deathday != "NA":
                 deathdate = individual_person.deathday.split("/")
@@ -57,7 +53,6 @@ def us01(individuals,families):
                 if(date.today() < date_of_death):
                     print('Error: deathday cannot be before today')
                     return False
-                # self.assertLess(deathDay, today, "Error: deathday cannot be before today")
 
     for family in families:
         for individual in individuals:
@@ -71,7 +66,6 @@ def us01(individuals,families):
                     if(date.today() < date_of_marriage):
                         print('Error : Married day cannot be before today')
                         return False
-                    # self.assertLess(marriedDay, today, "Error: Married day cannot be before today")
                 if family.divorced != "NA":
                     divorceddate = family.divorced.split("/")
                     date_of_divorce = date(
@@ -81,7 +75,6 @@ def us01(individuals,families):
                     if(date.today() < date_of_divorce):
                         print('Error: Divorced day cannot be before today')
                         return False
-                    # self.assertLess(divorcedDay, today, "Error: Divorced day cannot be before today")
     print('Test 1 Successfully Passed.')
     return True
 
