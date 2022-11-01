@@ -19,12 +19,12 @@ def us07(individuals, families):
             if(individual_person.age > 150):
                 print("ERROR: INDIVIDUAL: US07: More than 150 years old - Birth date {}".format(birthdate))
                 return  False          
-        else:
+        elif(isalive == 'False'):
             deathdate = individual_person.deathday.split("/")
             date_of_death = date(
                             int(deathdate[0]),
                             int(deathdate[1]),
-                            int(birthdate[2]))
+                            int(deathdate[2]))
             if individual_person.age > 150:
                 print("ERROR: INDIVIDUAL: US07: More than 150 years old at Death - Birth {} : Death {}".format(birthdate,deathdate))
                 return False           
@@ -92,11 +92,10 @@ def us02(individuals,families):
                 date_of_marriage = date(
                         int(marrieddate[0]),
                         int(marrieddate[1]),
-                        int(marrieddate[2]))
-                
+                        int(marrieddate[2]))              
 
                 if(date_of_birth > date_of_marriage):
-                    print('Birth should occur before marriage of an individual')
+                    print('Birth should occur before marriage of an individual {}'.format(individual.id))
                     return False
     print('Test 2 Successfully Passed.')                
     return True
@@ -194,8 +193,9 @@ def us14(individuals,families):
                                         count+=1
                                         if count>5:
                                             print("No more than five siblings should be born at the same time")
-                                            return
+                                            return False                                            
         print('Test 14 passed succesfully')
+        return True
 #Gautham Prem Krishnan
 def us15(individuals,families):
         table_value_one = families
@@ -203,9 +203,12 @@ def us15(individuals,families):
         for family in table_value_one:
             for indiv in table_value_zero:
                 if indiv.id in family.childrenId:
-                    if (len(family.childrenId<15)):
-                        return
+                    if (len(family.childrenId)<15):
+                        print('Test 15 passed succesfully')
+                        return True
                     elif (len(family.childrenId) >= 15):
                         print("There should be fewer than 15 siblings in a family")
-                        return
+                        return False
+        
         print('Test 15 passed succesfully')
+        return True

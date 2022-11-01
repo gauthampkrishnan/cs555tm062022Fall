@@ -15,10 +15,7 @@ individuals = gedcom_parser.individual_parser("gedcom_test.ged")
 families = gedcom_parser.family_parser("gedcom_test.ged")
 
 
-# print("Individual")
-# print(p_table)
-# print("Families")
-# print(f_table)
+
 
 class TestGedcomFile(unittest.TestCase):
 
@@ -45,23 +42,23 @@ class TestGedcomFile(unittest.TestCase):
     def test_us05(self):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         families = gedcom_parser.family_parser("gedcom_test.ged")
-        self.assertFalse(us05(individuals,families))
+        self.assertTrue(us05(individuals,families))
 
     def test_us06(self):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         families = gedcom_parser.family_parser("gedcom_test.ged")
-        self.assertFalse(us06(individuals,families))
+        self.assertTrue(us06(individuals,families))
     
     def test_us14(self):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         families = gedcom_parser.family_parser("gedcom_test.ged")
-        self.assertFalse(us14(individuals,families))
+        self.assertTrue(us14(individuals,families))
 
         
     def test_us15(self):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         families = gedcom_parser.family_parser("gedcom_test.ged")
-        self.assertFalse(us15(individuals,families))
+        self.assertTrue(us15(individuals,families))
 
 
 
