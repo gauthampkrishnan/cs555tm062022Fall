@@ -233,6 +233,10 @@ def us30(individuals):
                 married_list = f"Test case US30: {indiv.name} ({indiv.id}) is alive and married"
                 return(married_list)
             else:
+
                 print('Test 30 had no living married people')
+                print('Test 30 passed successfully')
                 return True
+        print('Test 30 passed successfully')
+        return True
         
