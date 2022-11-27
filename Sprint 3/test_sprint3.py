@@ -6,7 +6,7 @@ from datetime import date
 from datetime import datetime
 import gedcom_parser
 # from gedcom_parser import us02, us07, us01
-from Userstories_validation import us02, us03, us07, us01, us05, us06,us14,us15
+from Userstories_validation import us02, us03, us07, us01, us05, us06,us14,us15,us24,us27
 # from gedcom_parser import p_table, f_table
 
 
@@ -59,6 +59,15 @@ class TestGedcomFile(unittest.TestCase):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         families = gedcom_parser.family_parser("gedcom_test.ged")
         self.assertTrue(us15(individuals,families))
+
+    def test_us24(self):
+        
+        families = gedcom_parser.family_parser("gedcom_test.ged")
+        self.assertTrue(us24(families))
+
+    def test_u27(self):
+        individuals = gedcom_parser.individual_parser("gedcom_test.ged")
+        self.assertTrue(us27(individuals))
 
 
 

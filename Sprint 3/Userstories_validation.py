@@ -212,3 +212,33 @@ def us15(individuals,families):
         
         print('Test 15 passed succesfully')
         return True
+
+def us24(families):
+        unique = []
+        for family in families:
+            if [family.husbandName, family.wifeName, family.married] not in unique:
+                unique.append([family.husbandName, family.wifeName, family.married])
+            else:
+                print("No more than one family with the same spouses by name and the same marriage date should appear in a GEDCOM file")
+        print("Test 24 passed successfully")
+        return True
+
+ #User story 27 - List individuals with age
+def us27(individuals):
+        listOfNames = []
+        for indiv in individuals:
+            temp_alive = indiv.alive
+            temp_birth = indiv.birthday.split("/")
+            if(temp_alive != 'False'):
+                checkBirthDate = datetime.now() - datetime(int(temp_birth[0]), int(temp_birth[1]), int(temp_birth[2]))
+                age = str(int(checkBirthDate.total_seconds()/(3600*24*365)))
+                listOfNames.append(indiv.name + ", Age: " + age)
+                
+            else:
+                temp_death = indiv.death.split("/")
+                checkBirthDate = datetime.datetime(date(int(temp_death[2])), date(int(temp_death[1])), date(int(temp_death[0])) - date(int(temp_birth[2])), int(date(temp_birth[1])), int(temp_birth[0]))
+                age = str(int(checkBirthDate.total_seconds()/(3600*24*365)))
+                listOfNames.append(indiv.name + ", Age: " + age)
+        # print(listOfNames)
+        print("Test 27 passed successfully")
+        return True
