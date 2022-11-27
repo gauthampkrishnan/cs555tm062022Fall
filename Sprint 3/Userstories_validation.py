@@ -216,10 +216,11 @@ def us15(individuals,families):
 def us24(families):
         unique = []
         for family in families:
-            if [family.husbandName, family.wifeName, family.married] not in unique:
-                unique.append([family.husbandName, family.wifeName, family.married])
+            if [family.husbandName, family.wifeName, family.married]  in unique:
+                 print("There shouldnt be no more than one family with the same spouses(name) should be in gedcom file!")
+                
             else:
-                print("No more than one family with the same spouses by name and the same marriage date should appear in a GEDCOM file")
+               unique.append([family.husbandName, family.wifeName, family.married])
         print("Test 24 passed successfully")
         return True
 
