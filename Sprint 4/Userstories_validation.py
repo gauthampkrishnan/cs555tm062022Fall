@@ -239,4 +239,27 @@ def us30(individuals):
                 return True
         print('Test 30 passed successfully')
         return True
-        
+
+def us31(individuals,families):
+        for family in families:
+            for indiv in individuals:
+                if (family.husbandName == "N/A" and family.wife.age > 30 and family.wife.alive):
+                    print("into loop")
+                    info = f"Story US31: {indiv.name} ({indiv.id}) is over 30 years old at {indiv.age} and not married"
+                    print(info)
+                    return info
+                else:
+                    print('Test 31 passed successfully')
+                    return True
+
+    # #User story 32 - List all multiple births in a GEDCOM file
+def us32(families):
+        for family in families:
+            leng_value = len(family.childrenId)
+            if (leng_value > 1):
+                info = f"Story US32: Family {family.id} has multiple births ({leng_value}) on line "
+                print(info)
+                return info
+            else:
+                print('Test 32 passed successfully')
+                return True
