@@ -65,7 +65,7 @@ class TestGedcomFile(unittest.TestCase):
         families = gedcom_parser.family_parser("gedcom_test.ged")
         self.assertTrue(us24(families))
 
-    def test_u27(self):
+    def test_us27(self):
         individuals = gedcom_parser.individual_parser("gedcom_test.ged")
         self.assertTrue(us27(individuals))
 
