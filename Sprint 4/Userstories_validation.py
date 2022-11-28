@@ -162,6 +162,49 @@ def us06(individuals,families):
                             return False
     print("Test 6 passed successfully")
     return True
+#Sprint-4 Parth Patel
+def us10(individuals,families):   
+    for family in families:
+        if(family.married != "NA"):
+            marrieddate = family.married.split("/")
+            date_of_marriage = date(
+                    int(marrieddate[0]),
+                    int(marrieddate[1]),
+                    int(marrieddate[2]))
+        for individual in individuals:            
+            birthdate = individual.birthday.split("/")
+            date_of_birth = date(
+                            int(birthdate[0]),
+                            int(birthdate[1]),
+                            int(birthdate[2]))
+            if (family.married != "NA" and individual.id == family.husbandId and date_of_marriage.year - date_of_birth.year < 14):
+                print("Husband Birthdate is less than 14 years of Marriage Date")
+                return False
+            if (family.married != "NA" and individual.id == family.wifeId and date_of_marriage.year - date_of_birth.year < 14):
+                print("Wife Birthdate is less than 14 years of Marriage Date.")
+                return False
+    print("Test 10 passed successfully")
+    return True
+
+def us08(individuals, families):
+    for individual in individuals:
+        birthdate = individual.birthday.split("/")
+        date_of_birth = date(
+                        int(birthdate[0]),
+                        int(birthdate[1]),
+                        int(birthdate[2]))
+        for family in families:
+            if individual.id in family.childrenId:
+                marrieddate = family.married.split("/")
+                date_of_marriage = date(
+                        int(marrieddate[0]),
+                        int(marrieddate[1]),
+                        int(marrieddate[2]))
+                if(date_of_birth > date_of_marriage):
+                    print("Children birthday should be after marriage of parents.")
+                    return False
+    print("Test 8 passed successfully")
+    return True
 
 #Gautham Prem Krishnan
 def us14(individuals,families):
